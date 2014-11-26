@@ -1,0 +1,19 @@
+#diyTable {
+    width: 441px;
+    height: 441px;
+    border: 1px coral solid;
+    border-collapse: collapse;
+}
+#diyTable td {
+    width: 10px;
+    border: 1px orange solid;
+    padding: 0;
+}
+.left {
+    float: left;
+    margin-right: 20px;
+}
+canvas {
+    border: 1px solid #000000;
+    background-color: #dcdcdc;
+}
