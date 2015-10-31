@@ -46,7 +46,7 @@ Javascript:
         while (--n >= 0) {
             tmp = a;
             a += b;
-           b = tmp;
+            b = tmp;
         }
         return a;
     }
