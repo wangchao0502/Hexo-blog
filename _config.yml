@@ -89,6 +89,6 @@ plugins:
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
-  type: github
+  type: git
   repository: https://github.com/wangchao0502/wangchao0502.github.io.git
   branch: master
