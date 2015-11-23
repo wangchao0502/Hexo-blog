@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .change-mp {
+            margin: 0 10px;
+            padding: 0 10px;
+        }
+        .border {
+            border: 1px dotted orange;
+        }
+    </style>
+</head>
+<body>
+<h1>行内元素的margin和padding对周围元素的影响</h1>
+<p>
+    p是一个块级元素，我现在要在里边添加一些行级元素，比如说a
+    <a href="#">这是一个a标签</a>，接下来，我要添加更多的行级元素，然后调整最中间元素的margin和padding
+    <span class="border">第一个行级元素，没有修饰</span>
+    <span class="change-mp border">第二个行级元素，调整了margin和padding，为了视觉效果添加了边框</span>
+    <span class="border">第三个行级元素，没有修饰</span>
+</p>
+</body>
+</html>

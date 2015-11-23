@@ -1,0 +1,187 @@
+@import url("normalize.css");
+
+.clear {
+    clear: both;
+}
+
+/*块级元素居中 bootstrap的定义*/
+/*使用时一定要对元素设置宽度*/
+.center-block {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/*inline元素对齐方式*/
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/*为元素添加一些边距*/
+.wrap {
+    margin: 10px 20px;
+}
+
+/*里边写代码，黑底绿字*/
+pre {
+    padding: 10px;
+    border-left: 10px solid green;
+    background-color: black;
+    color: chartreuse;
+    text-align: left;
+    font-size: 0.8em;
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+/*用ul作为列表布局的时候，清空边距和内补*/
+ul.inline,
+ul.inlist {
+    margin: 0;
+    padding: 0;
+}
+
+/*取消默认的列表装饰符号*/
+ul.inline li,
+ul.inlist li {
+    list-style-type: none;
+}
+
+ul.inline li {
+    display: inline;
+}
+
+/*为一个展示区域添加背景的高亮*/
+.panel {
+    padding: 10px;
+    margin: 10px 0;
+    -webkit-box-shadow: 2px 2px 8px -2px grey;
+    -moz-box-shadow: 2px 2px 8px -2px grey;
+    box-shadow: 2px 2px 8px -2px grey;
+}
+
+/*文章的样式*/
+article {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #adadad;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px -2px grey;
+    /*background-color: lightgoldenrodyellow;*/
+    background-color: #f5f5d7;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.3) 50%, transparent 50%, transparent);
+    background-size: 3em 3em;
+    background-origin: content-box;
+}
+
+/*强调的内容*/
+strong {
+    font-weight: bold;
+}
+
+strong.notice {
+    color: red;
+}
+
+/*omg dynamic text*/
+@-webkit-keyframes breathe {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.omg-breathing {
+    -webkit-animation-timing-function: ease-in-out; /*动画时间曲线*/
+    -webkit-animation-name: breathe; /*动画名称，与@keyframes搭配使用*/
+    -webkit-animation-duration: 1600ms; /*动画持续时间*/
+    -webkit-animation-iteration-count: infinite; /*动画要重复次数*/
+    -webkit-animation-direction: alternate; /*动画执行方向，alternate 表示反复*/
+}
+
+/*definition list*/
+dl {
+}
+
+dt {
+    font-weight: bold;
+    line-height: 1.4;
+}
+
+dt:before,
+dt:after {
+    opacity: 0.5;
+}
+
+dt:before {
+    content: '「';
+
+}
+
+dt:after {
+    content: '」';
+}
+
+dt:hover {
+    font-weight: bold;
+    color: red;
+    transition: color .8s;
+}
+
+dt:hover:before,
+dt:hover:after {
+    color: red;
+    transition: color .8s, opacity .8s;
+    opacity: 1;
+}
+
+dd {
+    margin-bottom: 6px;
+    font-size: 0.86em;
+}
+
+/*code*/
+code {
+    margin: 0 3px;
+    padding: 2px 4px;
+    background-color: #f9f2f4;
+    border-radius: 4px;
+    font-size: 0.86em;
+}
+
+/*figure figcaption*/
+figure {
+    text-align: center;
+}
+
+figcaption {
+    font-size: 0.86em;
+    line-height: 2;
+    counter-increment: figure;
+}
+
+figcaption:before {
+    content: 'Figure ' counter(figure) '. ';
+    font-weight: bold;
+}
+
+/*some sign*/
+.sign-up:before {
+    content: '➥';
+    font-size: 120%;
+    color: red;
+}
+

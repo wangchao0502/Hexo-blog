@@ -1,0 +1,18 @@
+{
+  "name": "hexo-site",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Raphael Wang <georgewang2007@163.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/wangchao0502/hexo-blog",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

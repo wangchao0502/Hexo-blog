@@ -1,7 +1,9 @@
 title: Canvas之一 旋转的太极
 date: 2014-11-25 21:48:01
 categories: blog
-tags: [博客, 前端, 知识]
+tags: 
+- 前端
+- canvas
 ---
 
 今天看到了[康威生命游戏](http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)，有点小激动，想自己用javascript实现一个。本来想用表格的方式着色去做，但是又看到了已经有人通过HTML5的canvas完成了，代码都公布出来了[HTML5版本的生命游戏](http://blog.csdn.net/lifegame/article/details/6385081)，而且下下来就能运行。。然后就想着我可以做个更好的，但是不会canvas怎么办？学呗！经常知识栈溢出的我就是这么任性。

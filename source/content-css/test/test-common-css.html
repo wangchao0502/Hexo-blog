@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试common.css</title>
+    <link rel="stylesheet" href="/css/common.css"/>
+</head>
+<body>
+<div class="wrap">
+    <h1>测试common.css的展示效果</h1>
+
+    <h2>panel ＋ ul.inline & ul.inlist</h2>
+
+    <div class="panel">
+        <ul class="inline">
+            <li>001</li>
+            <li>002</li>
+            <li>003</li>
+            <li>004</li>
+            <li>005</li>
+        </ul>
+    </div>
+    <div class="panel">
+        <ul class="inlist">
+            <li>001</li>
+            <li>002</li>
+            <li>003</li>
+            <li>004</li>
+            <li>005</li>
+        </ul>
+    </div>
+
+    <h2>pre测试</h2>
+<pre>
+#absolute-block-center {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    background-color: #00ffff;
+}
+</pre>
+
+    <h2>strong测试</h2>
+
+    <p>这是一行文字，其中的<strong>strong</strong>单词用了strong标签包了起来，<strong class="notice">notice</strong>用了strong标签和notice样式</p>
+
+    <h2>article ＋ dl/dt/dd</h2>
+    <article>
+        <h3>补充：position的值以及作用</h3>
+        <dl>
+            <dt>static</dt>
+            <dd>默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right 或者 <strong class="notice">z-index</strong> 声明）。</dd>
+            <dt>relative</dt>
+            <dd>生成相对定位的元素，相对于其正常位置进行定位。因此，"left:20" 会向元素的 LEFT 位置添加 20 像素。</dd>
+            <dt>absolute</dt>
+            <dd>生成绝对定位的元素，相对于 static 定位以外的第一个父元素进行定位。元素的位置通过 "left", "top", "right" 以及 "bottom" 属性进行规定。</dd>
+            <dt>fixed</dt>
+            <dd>生成绝对定位的元素，相对于浏览器窗口进行定位。元素的位置通过 "left", "top", "right" 以及 "bottom" 属性进行规定。</dd>
+            <dt>inherit</dt>
+            <dd>规定应该从父元素继承 position 属性的值。</dd>
+        </dl>
+    </article>
+
+    <h2>code</h2>
+    <article>javascript定义函数用保留字<code>function</code>，条件判断用<code>switch</code>或者<code>if...else...</code></article>
+
+    <h2>Omg Text</h2>
+    <article>
+        <h3 class="omg-breathing">Omg-Breating</h3>
+
+    </article>
+
+</div>
+
+</body>
+</html>

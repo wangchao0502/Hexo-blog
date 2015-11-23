@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS3特性——flex布局</title>
+    <link rel="stylesheet" href="/css/common.css"/>
+    <style>
+        .flex {
+            display: flex;
+        }
+
+        img {
+            padding: 0 !important;
+        }
+
+        .block {
+            height: 100px;
+            background-color: orange;
+            border: 2px dotted red;
+            color: white;
+            text-align: center;
+        }
+
+        #exp1-item1 {
+            height: 100px;
+            width: 100px;
+            background-color: orange;
+        }
+
+        #exp1-item2 {
+            height: 200px;
+            width: 100px;
+            background-color: red;
+            color: white;
+        }
+
+        #exp1-item2 + span {
+            color: blue;
+        }
+
+        #exp2-item2 {
+            position: absolute;
+            opacity: 0.5;
+            align-content: center;
+            color: red;
+            background-color: white;
+        }
+
+        #exp3 > div {
+            width: 200px;
+            height: 100px;
+        }
+
+        #exp4 {
+            flex-flow: row wrap;
+        }
+
+        #exp7 > div,
+        #exp5 > div,
+        #exp4 > div {
+            width: 200px;
+            height: 100px;
+        }
+
+        #exp4 > div:nth-of-type(2n) {
+            width: 200px;
+            height: 200px;
+        }
+
+        #exp5 {
+            flex-flow: row-reverse;
+        }
+
+        #exp6 {
+            flex-flow: column;
+        }
+
+        #exp6 > div {
+            height: 50px;
+        }
+
+        #exp7 {
+            flex-flow: row-reverse wrap-reverse;
+        }
+
+        #exp8 {
+            flex-flow: column wrap;
+            height: 1000px;
+        }
+
+        #exp8 > div {
+            height: auto;
+            width: 20%;
+        }
+
+        #exp8 > div img {
+            max-width: 100%;
+        }
+
+        #exp9 {
+            flex-flow: row;
+            align-items: flex-start;
+        }
+
+        #exp10 > div,
+        #exp9 > div {
+            width: 20%;
+            color: white;
+            text-shadow: 1px 1px 2px grey;
+            border-bottom: 1px solid red;
+        }
+
+        #exp10 > div img,
+        #exp9 > div img {
+            max-width: 100%;
+            vertical-align: top;
+        }
+
+        #exp11 {
+            flex-flow: row wrap;
+            align-content: flex-start;
+            height: 500px;
+        }
+
+        #exp11 > div {
+            height: 100px;
+        }
+
+        #exp11 > div img {
+            max-height: 100%;
+        }
+
+        #exp12 {
+            flex-flow: row wrap;
+        }
+
+        #exp12 > div {
+            position: relative;
+            height: 200px;
+        }
+
+        #exp13 > div > span,
+        #exp12 > div > span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgba(255, 255, 255, .5);
+            color: #000;
+        }
+
+        #exp13 > div img,
+        #exp12 > div img {
+            max-height: 100%;
+            vertical-align: top;
+        }
+
+        #exp13 {
+            width: 100%;
+            flex-flow: row;
+        }
+
+        .change-flex-items {
+            height: 100px;
+        }
+
+        .change-flex-items:first-of-type {
+            background-color: orange;
+        }
+
+        .change-flex-items:last-of-type {
+            background-color: red;
+        }
+
+        .change-flex-items:nth-of-type(2) {
+            background-color: yellow;
+        }
+
+        #exp14 {
+            display: -webkit-flex;
+            display: flex;
+            -webkit-align-items: flex-end;
+            height: 100px;
+            margin: 0;
+            padding: 10px;
+            border-radius: 5px;
+            list-style: none;
+            background-color: #eee;
+        }
+
+        #exp14 li {
+            margin: 5px;
+            padding: 2px;
+            border-radius: 5px;
+            background: #aaa;
+            text-align: center;
+            text-indent: 0;
+        }
+
+        #exp14 li:nth-child(1) {
+            -webkit-align-self: flex-end;
+            align-self: flex-end;
+        }
+
+        #exp14 li:nth-child(2) {
+            -webkit-align-self: center;
+            align-self: center;
+        }
+
+        #exp14 li:nth-child(3) {
+            -webkit-align-self: flex-start;
+            align-self: flex-start;
+        }
+
+        #exp14 li:nth-child(4) {
+            -webkit-align-self: baseline;
+            align-self: baseline;
+        }
+
+        #exp14 li:nth-child(5) {
+            -webkit-align-self: baseline;
+            align-self: baseline;
+        }
+
+        #exp14 li:nth-child(6) {
+            -webkit-align-self: stretch;
+            align-self: stretch;
+        }
+
+        #exp14 li:nth-child(7) {
+            -webkit-align-self: auto;
+            align-self: auto;
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <h1>CSS3特性——flex布局</h1>
+    <small>--> <a href="http://www.w3.org/TR/2015/WD-css-flexbox-1-20150514/">w3c 官方文档 2015-05-14</a></small>
+    <article>
+        <p>flex布局：一个设置了display: flex |
+            inline-flex;的元素，就叫做伸缩容器。其内部的子元素称为伸缩项目，这些子元素使用伸缩布局模型来拍版。再已知这些名次的情况下，我们来通过实例感受下这种布局方式。</p>
+        <figure>
+            <img src="../image/flex-1.png" alt="flex结构"/>
+            <figcaption>flex容器结构示意图</figcaption>
+        </figure>
+        <dl>
+            <dt>main axis</dt>
+            <dd>The main axis of a flex container is the primary axis along which flex items are laid out. It extends in
+                the main dimension.
+            </dd>
+            <dt>main-start | main-end</dt>
+            <dd>The flex items are placed within the container starting on the main-start side and going toward the
+                main-end side.
+            </dd>
+            <dt>main size</dt>
+            <dd>A flex item’s width or height, whichever is in the main dimension, is the item’s main size. The flex
+                item’s main size property is either the width or height property, whichever is in the main dimension.
+            </dd>
+            <dt>cross axis</dt>
+            <dd>The axis perpendicular to the main axis is called the cross axis. It extends in the cross dimension.
+            </dd>
+            <dt>cross-start | cross-end</dt>
+            <dd>Flex lines are filled with items and placed into the container starting on the cross-start side of the
+                flex container and going toward the cross-end side.
+            </dd>
+            <dt>cross size</dt>
+            <dd>The width or height of a flex item, whichever is in the cross dimension, is the item’s cross size. The
+                cross size property is whichever of width or height that is in the cross dimension.
+            </dd>
+        </dl>
+    </article>
+
+    <h2>display: flex | inline-flex</h2>
+    <article>
+        <p>
+            flex容器为它的内容创建了一个flex format context，类似于BFC的效果，但是好处是不需要float元素，而且overflow属性已经自动的应用到flex containers里边。
+        </p>
+        <strong class="notice">注意：CSS的columns在伸缩容器上没有效果。float、clear和vertical-align在伸缩项目上没有效果。::first-line和::first-letter也失效。</strong>
+    </article>
+<pre>
+&lt;div class="flex">
+    &lt;!-- flex item: block child --&gt;
+    &lt;div id="exp1-item1"&gt;block&lt;/div&gt;
+    &lt;!-- flex item: floated element; floating is ignored --&gt;
+    &lt;div id="exp1-item2" style="float: left;"&gt;float&lt;/div&gt;
+    &lt;!-- flex item: anonymous block box around inline content --&gt;
+    anonymous item 3
+    &lt;!-- flex item: inline child --&gt;
+    &lt;span&gt;
+        item 4
+    &lt;/span&gt;
+&lt;/div&gt;
+</pre>
+    <div class="panel">
+        <div class="flex">
+            <!-- flex item: block child -->
+            <div id="exp1-item1">block</div>
+            <!-- flex item: floated element; floating is ignored -->
+            <div id="exp1-item2" style="float: left;">float没有效果</div>
+            <!-- flex item: anonymous block box around inline content -->
+            anonymous item 3
+            <!-- flex item: inline child -->
+            <span>
+                item 4
+            </span>
+        </div>
+    </div>
+    <article>
+        <p>
+            一个被声明为display: flex;则会成为一个flex容器，并构建一个flex format context，其中的元素自动称为flex-level boxes，不再是block-level
+            boxes，因此float失效。
+        </p>
+    </article>
+
+    <h2>flex items: Absolutely-Positioned, Margins and Paddings, Z-Ording, Collapsed, Minimum Size</h2>
+
+    <h3>Absolutyle-Positioned</h3>
+
+<pre>
+.block {
+    height: 100px;
+    background-color: orange;
+    border: 2px dotted red;
+    color: white;
+    text-align: center;
+}
+    &lt;div class="panel"&gt;
+        &lt;div class="flex"&gt;
+            &lt;div class="block"&gt;Normal item&lt;/div&gt;
+            &lt;div class="block" id="exp2-item2"&gt;Absolutely-Positioned item, left: 10px, top: 10px&lt;/div&gt;
+            &lt;div class="block"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+</pre>
+    <div class="panel">
+        <div class="flex" style="position: relative;">
+            <div class="block">An Normal item</div>
+            <div class="block" id="exp2-item2">
+                <div class="clock">static block</div>
+                <div class="clock">static block</div>
+            </div>
+            <div class="block">Last Normal item, ahahaha</div>
+        </div>
+    </div>
+    <article>
+        <strong class="notice">注意：absolute定位的flex item仍然有效。flex item的宽度会随着内容自动调整。</strong>
+    </article>
+
+    <h2>flex-flow</h2>
+
+    <div class="panel">
+        <p>如果不添加flex-flow属性，item会不管width的设置，只呈现在一行</p>
+
+        <div id="exp3" class="flex">
+            <div class="block">1</div>
+            <div class="block">2</div>
+            <div class="block">3</div>
+            <div class="block">4</div>
+            <div class="block">5</div>
+            <div class="block">6</div>
+            <div class="block">7</div>
+            <div class="block">8</div>
+            <div class="block">9</div>
+            <div class="block">10</div>
+        </div>
+    </div>
+    <div class="panel">
+        <p>flex-flow: row wrap; In flex container.</p>
+
+        <div id="exp4" class="flex">
+            <div class="block">1</div>
+            <div class="block">2</div>
+            <div class="block">3</div>
+            <div class="block">4</div>
+            <div class="block">5</div>
+            <div class="block">6</div>
+            <div class="block">7</div>
+            <div class="block">8</div>
+            <div class="block">9</div>
+            <div class="block">10</div>
+        </div>
+    </div>
+
+    <article>
+        <strong class="notice">关于flex-flow</strong>
+
+        <p>
+            flex-flow是用来伸缩行换行，flex-flow属性是同时设定“flex-direction(伸缩流的方向)”和“flex-wrap（伸缩行换行）”属性的缩写，两个属性决定了伸缩容器的主轴与侧轴。此属性主要适用于伸缩容器。
+        </p>
+        <strong class="notice">有关于flex-direction</strong>
+
+        <p>flex-direction属性可以用来设定伸缩容器的主轴的方向，这也决定了用户代理配置伸缩项目的方向。主要适用于伸缩容器，主要包括以下几个值：</p>
+        <dl>
+            <dt>row</dt>
+            <dd>默认值，表示伸缩容器的主轴与当前书写模式的行内轴（文字布局的主要主向）。主轴起点与主轴终点方向分别等同于当前书写模式的始与结方向。</dd>
+            <dt>row-reverse</dt>
+            <dd>表示的是除了主轴起点与主轴终点方向交换以外同row属性值的作用。</dd>
+            <dt>colomn</dt>
+            <dd>表示的是伸缩容器的主轴与当前书写模式的块轴（块布局的主要方向）同向。主轴起点与主轴终点方向分别等同于当前书写模式的前与后方向。简单的可以理解为列布局。</dd>
+            <dt>coloumn-reverse</dt>
+            <dd>表示的是除了主轴起点与主轴终点方向交换以外同“column”的属性值作用。</dd>
+        </dl>
+        <strong class="notice">关于flex-wrap</strong>
+
+        <p>flex-wrap属性主要用来控制伸缩容器是单行还是多行，也决定了侧轴方向一新的一行的堆放方向。主要适用于伸缩容器，主要包括以下几个值：</p>
+        <dl>
+            <dt>nowrap</dt>
+            <dd>默认值，表示的是伸缩容器为单行。侧轴起点方向等同于当前书写模式的起点或前/头在侧轴的那一边，而侧轴终点方向是侧轴起点的相反方向。</dd>
+            <dt>wrap</dt>
+            <dd>表示的是伸缩容器为多行。侧轴起点方向等同于当前书写模式的起眯或前/头在侧轴的那一边，而侧轴终点方向是侧轴起点的相反方向。</dd>
+            <dt>wrap-reverse</dt>
+            <dd>除了侧轴起点与侧轴终点方向交换以外同wrap所起作用相同。</dd>
+        </dl>
+    </article>
+
+    <div class="panel">
+        <p>flex-flow: row-reverse;</p>
+
+        <div id="exp5" class="flex">
+            <div class="block">1</div>
+            <div class="block">2</div>
+            <div class="block">3</div>
+            <div class="block">4</div>
+            <div class="block">5</div>
+            <div class="block">6</div>
+            <div class="block">7</div>
+            <div class="block">8</div>
+            <div class="block">9</div>
+            <div class="block">10</div>
+        </div>
+    </div>
+    <small class="sign-up">如果flex-item的宽度没有设置，则会自动按照内容调整宽度。如果设置了宽度，但没有设置wrap属性，则会等宽铺满一行，width属性不再起作用。</small>
+
+    <div class="panel">
+        <p>flex-flow: column;</p>
+
+        <div id="exp6" class="flex">
+            <div class="block" style="width: 200px;">1 width: 200px;</div>
+            <div class="block">2</div>
+            <div class="block">3</div>
+            <div class="block">4</div>
+            <div class="block">5</div>
+            <div class="block">6</div>
+            <div class="block">7</div>
+            <div class="block">8</div>
+            <div class="block">9</div>
+            <div class="block">10</div>
+        </div>
+    </div>
+    <small class="sign-up">纵向排列的flex-item如果不设置宽度，将自动占满一行。</small>
+
+    <div class="panel">
+        <p>flex-flow: row-reverse wrap-reverse;</p>
+
+        <div id="exp7" class="flex">
+            <div class="block" style="width: 200px;">1 width: 200px;</div>
+            <div class="block">2</div>
+            <div class="block">3</div>
+            <div class="block">4</div>
+            <div class="block">5</div>
+            <div class="block">6</div>
+            <div class="block">7</div>
+            <div class="block">8</div>
+            <div class="block">9</div>
+            <div class="block">10</div>
+        </div>
+    </div>
+    <small class="sign-up">wrap-reverse的效果就是，换到上一行去。同时也可以看到row-reverse与row的区别就是一个是从右往左排，一个从左往右排。</small>
+
+<pre>
+#exp8 {
+    flex-flow: column wrap;
+    height: 1000px;
+}
+
+#exp8 > div {
+    height: auto;
+    width: 20%;
+}
+
+#exp8 > div > img {
+    max-width: 100%;
+}
+</pre>
+    <div class="panel">
+        <p>实现瀑布流</p>
+
+        <div id="exp8" class="flex">
+            <div><img src="../image/img-1.jpg" alt=""/></div>
+            <div><img src="../image/img-2.jpg" alt=""/></div>
+            <div><img src="../image/img-3.jpg" alt=""/></div>
+            <div><img src="../image/img-4.jpg" alt=""/></div>
+            <div><img src="../image/img-5.jpg" alt=""/></div>
+            <div><img src="../image/img-6.jpg" alt=""/></div>
+            <div><img src="../image/img-7.jpg" alt=""/></div>
+            <div><img src="../image/img-8.jpg" alt=""/></div>
+            <div><img src="../image/img-9.jpg" alt=""/></div>
+            <div><img src="../image/img-10.jpg" alt=""/></div>
+            <div><img src="../image/img-11.jpg" alt=""/></div>
+            <div><img src="../image/img-12.jpg" alt=""/></div>
+            <div><img src="../image/img-13.jpg" alt=""/></div>
+            <div><img src="../image/img-14.jpg" alt=""/></div>
+            <div><img src="../image/img-15.jpg" alt=""/></div>
+            <div><img src="../image/img-16.jpg" alt=""/></div>
+            <div><img src="../image/img-17.jpg" alt=""/></div>
+            <div><img src="../image/img-18.jpg" alt=""/></div>
+            <div><img src="../image/img-19.jpg" alt=""/></div>
+            <div><img src="../image/img-20.jpg" alt=""/></div>
+        </div>
+    </div>
+    <small class="sign-up">如果将flex容器的高度调小，会变成四列瀑布，并且自动适配间距，此时的flex items的宽度将失效（道理同row布局）</small>
+
+    <h2>侧轴对齐伸缩项目——align-items</h2>
+    <article>
+        <strong class="notice">align-items充许您调整伸缩项目在侧轴的对齐方式，主要包括以下几个值：</strong>
+        <dl>
+            <dt>flex-start</dt>
+            <dd>伸缩项目在侧轴起点边的外边距靠住该行在侧轴起点的边。</dd>
+            <dt>flex-end</dt>
+            <dd>伸缩项目在侧轴终点边的外边距靠住该行在侧轴终点的边。</dd>
+            <dt>center</dt>
+            <dd>伸缩项目的外边距盒在该行的侧轴上居中放置。（如果伸缩行的尺寸小于伸缩项目，则伸缩项目会向两个方向溢出相同的量）。</dd>
+            <dt>stretch</dt>
+            <dd>默认值，伸缩项目拉伸，填满整个侧轴</dd>
+            <dt>baseline</dt>
+            <dd>根据内容的基线对齐</dd>
+        </dl>
+        <div class="text-center"><img src="../image/flex-2.jpg" alt=""/></div>
+    </article>
+<pre>
+#exp9 {
+    flex-flow: row;
+    align-items: flex-start;
+}
+
+#exp9 > div {
+    width: 20%;
+    color: white;
+    text-shadow: 1px 1px 2px grey;
+    border-bottom: 1px solid red;
+}
+
+#exp9 > div > img {
+    max-width: 100%;
+    vertical-align: top;
+}
+</pre>
+    <div class="panel">
+        <p>align-items</p>
+
+        <div style="margin-bottom: 10px;">
+            <button class="change-align-items">flex-start</button>
+            <button class="change-align-items">flex-end</button>
+            <button class="change-align-items">center</button>
+            <button class="change-align-items">stretch</button>
+            <button class="change-align-items">baseline</button>
+        </div>
+        <div class="flex" id="exp9">
+            <div><img src="../image/img-1.jpg" alt=""/>Image No.1</div>
+            <div><img src="../image/img-10.jpg" alt=""/>Image No.2</div>
+            <div><img src="../image/img-11.jpg" alt=""/>Image No.3</div>
+            <div><img src="../image/img-12.jpg" alt=""/>Image No.4</div>
+            <div><img src="../image/img-13.jpg" alt=""/>Image No.5</div>
+        </div>
+        <script>
+            function bind_align_items() {
+                var container = document.getElementById('exp9');
+                var buttons = document.getElementsByClassName('change-align-items');
+                for (var i = 0, length = buttons.length; i < length; i++) {
+                    buttons[i].onclick = function () {
+                        container.style.alignItems = this.innerHTML;
+                    }
+                }
+            }
+        </script>
+    </div>
+    <small class="sign-up">其中的stretch可以用于构建等高布局</small>
+
+    <h2>主轴对齐伸缩项目——justify-content</h2>
+    <article>
+        <strong class="notice">这个属性主要用来设置伸缩项目沿主轴的对齐方式，从而调整伸缩项目之间的间距。设置了这个属性，在主轴方向上设置的任何margin都不会起作用。</strong>
+        <dl>
+            <dt>flex-start</dt>
+            <dd>伸缩项目向一行的起始位置靠齐。该行的第一个伸缩项目在主轴起点边的外边距与该行在主轴起点的边对齐，同时所有后续的伸缩项目与其前一个项目对齐。</dd>
+            <dt>flex-end</dt>
+            <dd>伸缩项目向一行的结束位置靠齐。该行的最后一个伸缩项目在主轴终点边的外边距与该行在主轴终点的边对齐，同时所有前面的伸缩项目与其后一个项目对齐。</dd>
+            <dt>center</dt>
+            <dd>
+                伸缩项目向一行的中间位置靠齐。该行的伸缩项目将相互对齐并在行中居中对齐，同时第一个项目与该行的在主轴起点的边的距离等同与最后一个项目与该行在主轴终点的边的距离（如果剩余空间是负数，则保持两端溢出的长度相等）。
+            </dd>
+            <dt>space-between</dt>
+            <dd>
+                伸缩项目会平均地分布在一行里。如果剩余空间是负数，或该行只有一个伸缩项目，则此值等效于「flex-start」。在其它情况下，第一个项目在主轴起点边的外边距会与该行在主轴起点的边对齐，同时最后一个项目在主轴终点边的外边距与该行在主轴终点的边对齐，而剩下的伸缩项目在确保两两之间的空白空间相等下平均分布。
+            </dd>
+            <dt>space-around</dt>
+            <dd>
+                伸缩项目会平均地分布在行里，两端保留一半的空间。如果剩余空间是负数，或该行只有一个伸缩项目，则该值等效于「center」。在其它情况下，伸缩项目在确保两两之间的空白空间相等，同时第一个元素前的空间以及最后一个元素后的空间为其他空白空间的一半下平均分布。
+            </dd>
+        </dl>
+        <div class="text-center"><img src="../image/flex-3.png" alt=""/></div>
+    </article>
+
+
+    <div class="panel">
+        <p>justify-content</p>
+
+        <div style="margin-bottom: 10px;">
+            <button class="change-justify-content">flex-start</button>
+            <button class="change-justify-content">flex-end</button>
+            <button class="change-justify-content">center</button>
+            <button class="change-justify-content">space-between</button>
+            <button class="change-justify-content">space-around</button>
+        </div>
+        <div class="flex" id="exp10">
+            <div><img src="../image/img-1.jpg" alt=""/>Image No.1</div>
+            <div><img src="../image/img-10.jpg" alt=""/>Image No.2</div>
+            <div><img src="../image/img-11.jpg" alt=""/>Image No.3</div>
+        </div>
+        <script>
+            function bind_justify_content() {
+                var container = document.getElementById('exp10');
+                var buttons = document.getElementsByClassName('change-justify-content');
+                for (var i = 0, length = buttons.length; i < length; i++) {
+                    buttons[i].onclick = function () {
+                        container.style.justifyContent = this.innerHTML;
+                    }
+                }
+            }
+        </script>
+    </div>
+
+    <h2>伸缩项目堆栈伸缩行——align-content</h2>
+    <article>
+        <strong class="notice">这个属性主要用来调整伸缩行在伸缩容器里的对齐方式。不过他会更改flex-wrap的行为，比如说：“wrap”。align-content和align-items相似，但是不是对齐伸缩项目，它对齐的是伸缩行，其主要包括以下几个值：</strong>
+        <dl>
+            <dt>flex-start</dt>
+            <dd>各行向伸缩容器的起点位置堆叠。伸缩容器中第一行在侧轴起点的边会紧靠住伸缩容器在侧轴起点的边，之后的每一行都紧靠住前面一行。</dd>
+            <dt>flex-end</dt>
+            <dd>各行向伸缩容器的结束位置堆叠。伸缩容器中最后一行在侧轴终点的边会紧靠住该伸缩容器在侧轴终点的边，之前的每一行都紧靠住后面一行。</dd>
+            <dt>center</dt>
+            <dd>
+                各行向伸缩容器的中间位置堆叠。各行两两紧靠住同时在伸缩容器中居中对齐，保持伸缩容器在侧轴起点边的内容边和第一行之间的距离与该容器在侧轴终点边的内容边与第最后一行之间的距离相等。（如果剩下的空间是负数，则行的堆叠会向两个方向溢出的相等距离。）
+            </dd>
+            <dt>space-between</dt>
+            <dd>
+                各行在伸缩容器中平均分布。如果剩余的空间是负数或伸缩容器中只有一行，该值等效于「flex-start」。在其它情况下，第一行在侧轴起点的边会紧靠住伸缩容器在侧轴起点边的内容边，最后一行在侧轴终点的边会紧靠住伸缩容器在侧轴终点的内容边，剩余的行在保持两两之间的空间相等的状况下排列。
+            </dd>
+            <dt>space-around</dt>
+            <dd>
+                各行在伸缩容器中平均分布，在两边各有一半的空间。如果剩余的空间是负数或伸缩容器中只有一行，该值等效于「center」。在其它情况下，各行会在保持两两之间的空间相等，同时第一行前面及最后一行后面的空间是其他空间的一半的状况下排列。
+            </dd>
+            <dt>stretch</dt>
+            <dd>各行将会伸展以占用剩余的空间。如果剩余的空间是负数，该值等效于「flex-start」。在其它情况下，剩余空间被所有行平分，扩大各行的侧轴尺寸。</dd>
+        </dl>
+        <div class="text-center"><img src="../image/flex-4.png" alt=""/></div>
+    </article>
+
+    <div class="panel">
+        <p>align-content</p>
+
+        <div style="margin-bottom: 10px;">
+            <button class="change-align-content">flex-start</button>
+            <button class="change-align-content">flex-end</button>
+            <button class="change-align-content">center</button>
+            <button class="change-align-content">space-between</button>
+            <button class="change-align-content">space-around</button>
+            <button class="change-align-content">stretch</button>
+        </div>
+        <div class="flex" id="exp11">
+            <div><img src="../image/img-1.jpg" alt=""/></div>
+            <div><img src="../image/img-2.jpg" alt=""/></div>
+            <div><img src="../image/img-3.jpg" alt=""/></div>
+            <div><img src="../image/img-4.jpg" alt=""/></div>
+            <div><img src="../image/img-5.jpg" alt=""/></div>
+            <div><img src="../image/img-6.jpg" alt=""/></div>
+            <div><img src="../image/img-7.jpg" alt=""/></div>
+            <div><img src="../image/img-8.jpg" alt=""/></div>
+            <div><img src="../image/img-9.jpg" alt=""/></div>
+            <div><img src="../image/img-10.jpg" alt=""/></div>
+        </div>
+        <script>
+            function bind_align_content() {
+                var container = document.getElementById('exp11');
+                var buttons = document.getElementsByClassName('change-align-content');
+                for (var i = 0, length = buttons.length; i < length; i++) {
+                    buttons[i].onclick = function () {
+                        container.style.alignContent = this.innerHTML;
+                    }
+                }
+            }
+        </script>
+    </div>
+
+    <h2>伸缩项目在侧轴方向上的对齐方式——align-self</h2>
+    <article>
+        <strong class="notice">伸缩项目在侧轴方向上的对齐方式，align-self：auto | flex-start | flex-end | center | baseline |
+            stretch;</strong>
+        <dl>
+            <dt>auto</dt>
+            <dd>如果'align-self'的值为'auto'，则其计算值为元素的父元素的'align-items'值，如果其没有父元素，则计算值为'stretch'。</dd>
+            <dt>flex-start</dt>
+            <dd>弹性盒子元素的侧轴（纵轴）起始位置的边界紧靠住该行的侧轴起始边界。</dd>
+            <dt>flex-end</dt>
+            <dd>弹性盒子元素的侧轴（纵轴）起始位置的边界紧靠住该行的侧轴结束边界。</dd>
+            <dt>center</dt>
+            <dd>弹性盒子元素在该行的侧轴（纵轴）上居中放置。（如果该行的尺寸小于弹性盒子元素的尺寸，则会向两个方向溢出相同的长度）。</dd>
+            <dt>baseline</dt>
+            <dd>如弹性盒子元素的行内轴与侧轴为同一条，则该值与'flex-start'等效。其它情况下，该值将参与基线对齐。</dd>
+            <dt>stretch</dt>
+            <dd>如果指定侧轴大小的属性值为'auto'，则其值会使项目的边距盒的尺寸尽可能接近所在行的尺寸，但同时会遵照'min/max-width/height'属性的限制。</dd>
+        </dl>
+    </article>
+    <div class="panel">
+        <ul id="exp14">
+            <li>flex-end</li>
+            <li>center</li>
+            <li>flex-start</li>
+            <li>baseline</li>
+            <li>baseline</li>
+            <li>stretch</li>
+            <li>auto</li>
+            <li>auto</li>
+            <li>auto</li>
+        </ul>
+    </div>
+
+    <h2>改变元素布局的顺序——order</h2>
+    <article>
+        <p>
+            传统上不改变元素的结构要改变元素的布局顺序一直是一个痛苦的事情。不过在Flexbox中，你可以通过“order”属性来修改伸缩项目的布局顺序（在不调整结构前提之下）。这个属性一直接受的整数值——称为系数集——也称为排序组，会出现在伸缩项目中。</p>
+
+        <p>默认情况之下，所有的伸缩项目的顺序组都是“0”。我们可以很容易的给每个伸缩项目设置不同的顺序值。更高的值会排在后面，而原来的HTML结构并不会有任何变化。</p>
+    </article>
+
+    <div class="panel">
+        <p id="show-order">No.1 ~ No.4图片对应的order值：<strong class="notice">0, 0, 0, 0</strong></p>
+
+        <div style="margin-bottom: 10px;">
+            <button id="change-order">随机改变四个图片的order属性</button>
+        </div>
+        <div class="flex" id="exp12">
+            <div class="change-order-items"><img src="../image/img-1.jpg" alt=""/><span>No.1</span></div>
+            <div class="change-order-items"><img src="../image/img-2.jpg" alt=""/><span>No.2</span></div>
+            <div class="change-order-items"><img src="../image/img-3.jpg" alt=""/><span>No.3</span></div>
+            <div class="change-order-items"><img src="../image/img-4.jpg" alt=""/><span>No.4</span></div>
+        </div>
+        <script>
+            function bind_change_order() {
+                var flex_items = document.getElementsByClassName('change-order-items');
+                var output = document.getElementById('show-order').querySelector('strong');
+                var button = document.getElementById('change-order');
+                button.onclick = function () {
+                    var str = [];
+                    for (var i = 0; i < 4; i++) {
+                        var order = Math.round(Math.random() * 4);
+                        str.push(order);
+                        flex_items[i].style.order = order;
+                    }
+                    output.innerHTML = str.join(', ');
+                }
+            }
+        </script>
+    </div>
+
+    <h2>使你的元素具有弹性——flex</h2>
+    <article>
+        <strong class="notice">可以通过“flex”属性设置一个可用的空间。<code>none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'>
+            ]</code></strong>
+        <dl>
+            <dt>flex-grow</dt>
+            <dd>此number部件可以用来设置「flex-grow」长写并指定扩展比率，也就是剩余空间是正值的时候此伸缩项目相对于伸缩容器里其他伸缩项目能分配到空间比例。若省略了此部件，则它会被设为「1」。</dd>
+            <dt>flex-shrink</dt>
+            <dd>
+                此number部件可以用来设置「flex-shrink」长写并指定收缩比率，也就是剩余空间是负值的时候此伸缩项目相对于伸缩容器里其他伸缩项目能收缩的空间比例。若省略了此部件，则它会被设为「1」。在收缩的时候收缩比率会以伸缩基准值加权。
+            </dd>
+            <dt>flex-basis</dt>
+            <dd>
+                与「width」属性使用相同的值的此部件可以用来设置「flex-basis」长写并指定伸缩基准值，也就是根据可伸缩比率计算出剩余空间的分布之前，伸缩项目主轴长度的起始数值。若在「flex」缩写省略了此部件，则「flex-basis」的指定值是长度零。若「flex-basis」的指定值是「auto」，则伸缩基准值的指定值是元素主轴长度属性的值。（这个值可能是关键字「auto」，代表元素的长度取决于其内容。）
+                <div class="text-center"><img src="../image/flex-5.png" alt=""/></div>
+            </dd>
+            <dt>none</dt>
+            <dd>关键字「none」的计算值为「0 0 auto」。</dd>
+        </dl>
+        <strong class="notice">「flex」的各部件的初始值等同于「flex: 0 1 auto」。</strong>
+    </article>
+
+    <div class="panel">
+        <p>flex属性</p>
+        <article>
+            <dl>
+                <dt>flex-grow</dt>
+                <dd>
+                    这些没单位的值是作为一个比例，他们决定于伸缩容器中有多少个伸缩项目。可以决定伸缩项目在伸缩容器中的空间大小。如果每个都设置为1，每个伸缩项目在伸缩容器内都相等。如果你给其中一个伸缩项目设置为2，那么这个伸缩项目会占用空间是其他伸缩项目的两倍。
+                </dd>
+                <dt>flex-shrink</dt>
+                <dd>
+                    flex-shrink称为收缩比率。这个值只有伸缩项目在没主轴方向溢出伸缩容器才会发挥作用。他们充当比例值，但这回指的是溢出量，将这个溢出量按比例分配给每个伸缩项目，用于防止伸缩容器溢出。<strong
+                        class="notice">当容器的flex-flow设置为nowrap时生效</strong><br/>
+                    <strong class="notice">公式：实际值 = 计划值 - 总差值 * flex-shrink/(flex-shrink总和) </strong>
+                </dd>
+                <dt>flex-basis</dt>
+                <dd>如果项目制定了实际长度，则此长度为主。否则为自动计算长度。默认为auto。</dd>
+            </dl>
+            <strong class="notice">***
+                如果为伸缩容器指定width，则flex-grow属性将作用在增长的宽度上，所以看起来就不是flex-grow设置的比例。而flex-basis和width起到的作用是一样的</strong><br/>
+        </article>
+
+        <div style="margin-bottom: 10px;">
+            图片1的flex属性（flex-grow, flex-shrink, flex-basis）: <br/>
+            <label for="img1-flex-grow"><input id="img1-flex-grow" type="text"/></label>
+            <label for="img1-flex-shrink"><input id="img1-flex-shrink" type="text"/></label>
+            <label for="img1-flex-basis"><input id="img1-flex-basis" type="text"/></label>
+            <button class="change-flex">刷新</button>
+        </div>
+        <div style="margin-bottom: 10px;">
+            图片2的flex属性（flex-grow, flex-shrink, flex-basis）: <br/>
+            <label for="img2-flex-grow"><input id="img2-flex-grow" type="text"/></label>
+            <label for="img2-flex-shrink"><input id="img2-flex-shrink" type="text"/></label>
+            <label for="img2-flex-basis"><input id="img2-flex-basis" type="text"/></label>
+            <button class="change-flex">刷新</button>
+        </div>
+        <div style="margin-bottom: 10px;">
+            图片3的flex属性（flex-grow, flex-shrink, flex-basis）: <br/>
+            <label for="img3-flex-grow"><input id="img3-flex-grow" type="text"/></label>
+            <label for="img3-flex-shrink"><input id="img3-flex-shrink" type="text"/></label>
+            <label for="img3-flex-basis"><input id="img3-flex-basis" type="text"/></label>
+            <button class="change-flex">刷新</button>
+        </div>
+        <small class="notice sign-up">设置参数后可见</small>
+        <div class="flex" id="exp13">
+            <div class="change-flex-items"></div>
+            <div class="change-flex-items"></div>
+            <div class="change-flex-items"></div>
+        </div>
+        <script>
+            function bind_flex_items() {
+                var buttons = document.getElementsByClassName('change-flex');
+                var flex_items = document.getElementById('exp13').children;
+                for (var i = 0, l = buttons.length; i < l; i++) {
+                    var inputs = buttons[i].parentNode.querySelectorAll('input');
+                    buttons[i].onclick = (function (n) {
+                        var _inputs = inputs;
+                        return function () {
+                            var flex_grow = _inputs[0].value;
+                            var flex_shrink = _inputs[1].value;
+                            var flex_basis = _inputs[2].value;
+                            flex_items[n].style.flexGrow = flex_grow;
+                            flex_items[n].style.flexShrink = flex_shrink;
+                            flex_items[n].style.flexBasis = flex_basis;
+                        }
+                    })(i);
+                }
+            }
+        </script>
+    </div>
+
+
+</div>
+
+<script>
+    window.onload = function () {
+        bind_align_items();
+        bind_justify_content();
+        bind_align_content();
+        bind_change_order();
+        bind_flex_items();
+    }
+</script>
+
+</body>
+</html>

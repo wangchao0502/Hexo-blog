@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>inline-block研究</title>
+    <style>
+        .ib-display {
+            display: inline-block;
+            border: 1px solid orange;
+            font-size: 14px;
+        }
+        .f0 {
+            font-size: 0;
+        }
+    </style>
+</head>
+<body>
+<h1>inline-block的间隙问题</h1>
+<p>产生间隙的原因是因为html文档的每个inline-block后面都加了一个换行</p>
+<div>
+    <span class="ib-display">第一块</span>
+    <span class="ib-display">第二块</span>
+    <span class="ib-display">第三块</span>
+    <span class="ib-display">第四块</span>
+    <span class="ib-display">第五块</span>
+</div>
+<hr/>
+
+<h2>去掉换行符</h2>
+<div>
+    <span class="ib-display">第一块</span><span class="ib-display">第二块</span><span class="ib-display">第三块</span><span class="ib-display">第四块</span><span class="ib-display">第五块</span>
+</div>
+<hr/>
+
+<h2>外层元素增加 font-size: 0;</h2>
+<div class="f0">
+    <span class="ib-display">第一块</span>
+    <span class="ib-display">第二块</span>
+    <span class="ib-display">第三块</span>
+    <span class="ib-display">第四块</span>
+    <span class="ib-display">第五块</span>
+</div>
+<hr/>
+
+<pre>
+white-space：normal | pre | nowrap | pre-wrap | pre-line
+
+默认值：normal
+
+normal：默认处理方式。
+pre：用等宽字体显示预先格式化的文本，不合并文字间的空白距离，当文字超出边界时不换行。可查阅 pre 对象
+nowrap：强制在同一行内显示所有文本，直到文本结束或者遭遇 br 对象。
+pre-wrap：用等宽字体显示预先格式化的文本，不合并文字间的空白距离，当文字碰到边界时发生换行。
+pre-line：保持文本的换行，不保留文字间的空白距离，当文字碰到边界时发生换行。
+</pre>
+<hr/>
+
+</body>
+</html>

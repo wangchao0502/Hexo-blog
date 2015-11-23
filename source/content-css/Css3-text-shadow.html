@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS3特性——文字阴影</title>
+    <link rel="stylesheet" href="/css/common.css"/>
+    <style>
+        #exp1 {
+            color: white;
+            text-shadow: 2px 2px 4px #000000;
+        }
+
+        #exp2-3-wrap {
+            color: white;
+            background-color: black;
+        }
+
+        #exp2 {
+            text-shadow: 2px 2px 2px red, 0 0 10px yellow;
+        }
+
+        #exp3 {
+            text-shadow: 0 0 10px yellow;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <h1>CSS3新特性：文字阴影text-shadow</h1>
+
+    <h2>属性简介</h2>
+    <article>
+        <h3 class="notice">text-shadow: h-shadow v-shadow blur color;</h3><br/>
+        <small><b>注释：</b>text-shadow 属性向文本添加一个或多个阴影。该属性是逗号分隔的阴影列表，每个阴影有两个或三个长度值和一个可选的颜色值进行规定。省略的长度是 0。
+        </small>
+        <dl>
+            <dt>h-shadow</dt>
+            <dd>必需。水平阴影的位置。允许负值。</dd>
+            <dt>v-shadow</dt>
+            <dd>必需。垂直阴影的位置。允许负值。</dd>
+            <dt>blur</dt>
+            <dd>可选。模糊距离。</dd>
+            <dt>spread<
+            <dt>color</dt>
+            <dd>可选。阴影的颜色。请参阅 CSS 颜色值。</dd>
+        </dl>
+    </article>
+
+    <h2>实例</h2>
+
+    <h3>白色文本的阴影效果</h3>
+<pre>
+#exp1 {
+    color:white;
+    text-shadow:2px 2px 4px #000000;
+}
+</pre>
+    <div class="panel text-center">
+        <span id="exp1">白色文本的阴影效果！</span>
+    </div>
+
+    <h3>多阴影效果</h3>
+<pre>
+#exp2-3-wrap {
+    color: white;
+    background-color: black;
+}
+
+#exp2 {
+    text-shadow: 2px 2px 2px red, 0 0 10px yellow;
+}
+
+#exp3 {
+    text-shadow: 0 0 10px yellow;
+}
+</pre>
+    <div class="panel text-center" id="exp2-3-wrap">
+        <span id="exp2">Hello, I'm多阴影效果！</span>
+        <span id="exp3">Hello, I'm单阴影效果！</span>
+        <span>Hello, I'm纯白的文字！</span>
+    </div>
+
+</div>
+
+</body>
+</html>

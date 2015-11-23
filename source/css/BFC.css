@@ -1,0 +1,45 @@
+.wrap {
+    width: 300px;
+    position: relative;
+}
+
+.aside {
+    width: 100px;
+    height: 150px;
+    float: left;
+    background: #f66;
+}
+
+.main {
+    height: 200px;
+    background: #fcc;
+}
+
+.over-hide {
+    overflow: hidden;
+}
+
+.par {
+    border: 5px solid #fcc;
+    width: 300px;
+}
+
+.child {
+    border: 5px solid #f66;
+    width:100px;
+    height: 100px;
+    float: left;
+}
+
+.clear {
+    clear: both;
+}
+
+.exp-margin p.exp-p {
+    color: #f55;
+    background: #fcc;
+    width: 200px;
+    line-height: 100px;
+    text-align:center;
+    margin: 100px;
+}

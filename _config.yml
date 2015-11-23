@@ -3,9 +3,9 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 三生万物 超哥的Blog
-subtitle: 42
-description: 
+title: Raphael Wang
+subtitle: 三生万物
+description: 从国内最好的财经类院校走出的程序员，致力于唱好每一首歌，写好每一行代码。
 author: Wang Chao
 email: georgewang2007@163.com
 language: zh-CN
@@ -80,7 +80,7 @@ disqus_shortname:
 # Extensions
 ## Plugins: https://github.com/hexojs/hexo/wiki/Plugins
 ## Themes: https://github.com/hexojs/hexo/wiki/Themes
-theme: nadymain
+theme: maupassant
 exclude_generator:
 plugins:
 - hexo-generator-feed

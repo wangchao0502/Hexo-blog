@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS3特性——圆角</title>
+    <link rel="stylesheet" href="/css/common.css"/>
+    <style>
+        #circle {
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            background-color: orange;
+        }
+
+        #half-circle {
+            height: 100px;
+            width: 50px;
+            border-radius: 50px 0 0 50px;
+            background-color: orange;
+        }
+
+        #quarter-circle {
+            height: 100px;
+            width: 100px;
+            border-radius: 100px 0 0 0;
+            background-color: orange;
+        }
+
+        #hollow-quarter-circle {
+            height: 100px;
+            width: 100px;
+            border: 2px solid orange;
+            border-radius: 100px 0 0 0;
+        }
+
+        #ellipse {
+            height: 50px;
+            width: 100px;
+            border-radius: 100px / 50px;
+            background-color: orange;
+        }
+
+        #opera-outter {
+            display: inline-block;
+            width: 180px;
+            height: 200px;
+            border-radius: 180px / 200px;
+            background-color: red;
+        }
+
+        #opera-inner {
+            display: inline-block;
+            width: 100px;
+            height: 160px;
+            margin-top: 20px;
+            border-radius: 100px / 160px;
+            background-color: white;
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <h1>CSS3新特性：实现圆角border-radius</h1>
+
+    <h2>属性简介</h2>
+    <article>
+        <h3 class="notice">border-radius ： none | &lt;length&gt;{1,4} [/ &lt;length&gt;{1,4} ]?;</h3><br/>
+        <small><b>注释：</b>按此顺序设置每个 radii 的四个值。如果省略 bottom-left，则与 top-right 相同。如果省略 bottom-right，则与 top-left
+            相同。如果省略top-right，则与 top-left 相同。
+        </small>
+        <dl>
+            <dt>length</dt>
+            <dd>定义圆角的形状。</dd>
+            <dt>%</dt>
+            <dd>以百分比定义圆角的形状。</dd>
+        </dl>
+
+    </article>
+
+    <h2>实例</h2>
+
+    <h3>最简单的圆</h3>
+<pre>
+#circle {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    background-color: blue;
+}
+</pre>
+    <div class="panel">
+        <div id="circle" class="center-block"></div>
+    </div>
+
+    <h3>半圆</h3>
+
+<pre>
+#half-circle {
+    height: 100px;
+    width: 50px;
+    border-radius: 50px 0 0 50px;
+    background-color: orange;
+}
+</pre>
+    <div class="panel">
+        <div id="half-circle" class="center-block"></div>
+    </div>
+    <small>* 看代码</small>
+
+    <h3>四分之一圆</h3>
+<pre>
+#quarter-circle {
+    height: 100px;
+    width: 100px;
+    border-radius: 100px 0 0 0;
+    background-color: orange;
+}
+</pre>
+    <div class="panel">
+        <div id="quarter-circle" class="center-block"></div>
+    </div>
+
+    <h3>空心四分之一圆</h3>
+<pre>
+#hollow-quarter-circle {
+    height: 100px;
+    width: 100px;
+    border: 2px solid orange;
+    border-radius: 100px 0 0 0;
+}
+</pre>
+    <div class="panel">
+        <div id="hollow-quarter-circle" class="center-block"></div>
+    </div>
+
+    <h3>模拟月食</h3>
+    <a href="/CssSimples/content/toys/Eclipse.html">Click me to see</a>
+
+    <h2>水平半径和垂直半径</h2>
+    <article>
+        <p>
+            根据定义<code>border-radius ： none | &lt;length&gt;{1,4} [/ &lt;length&gt;{1,4} ]?;</code>
+            <br/>
+            我们可以看出border-radius最多可以有8个参数，用／等分。前四个代表圆角的水平半径，后四个代表圆角的竖直半径，分别表示高中数学中椭圆的x轴
+            截距和y轴截距</p>
+
+        <p>我们可以用这个特征花一些椭圆</p>
+    </article>
+<pre>
+#ellipse {
+    height: 50px;
+    width: 100px;
+    border-radius: 100px / 50px;
+    background-color: orange;
+}
+</pre>
+    <div class="panel">
+        <div id="ellipse" class="center-block"></div>
+    </div>
+
+    <h3>应用：Oprera浏览器logo</h3>
+<pre>
+#opera-outter {
+    display: inline-block;
+    width: 180px;
+    height: 200px;
+    border-radius: 180px / 200px;
+    background-color: red;
+}
+#opera-inner {
+    display: inline-block;
+    width: 100px;
+    height: 160px;
+    margin-top: 20px;
+    border-radius: 100px / 160px;
+    background-color: white;
+}
+</pre>
+    <div class="panel text-center">
+        <span id="opera-outter"><span id="opera-inner"></span></span>
+    </div>
+
+</div>
+</body>
+</html>

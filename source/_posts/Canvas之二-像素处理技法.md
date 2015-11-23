@@ -1,14 +1,18 @@
 title: Canvas之二 像素处理技法
 date: 2014-11-25 22:39:03
 categories: blog
-tags: [博客, 前端, 知识]
+tags:
+- 前端
+- canvas
+- 图像处理
 ---
 
 继续上一篇文章，这篇文章介绍通过Canvas对图片（Image对象）的像素处理方法，同样文章参考阮一峰前辈的[Canvas API文档](http://javascript.ruanyifeng.com/htmlapi/canvas.html)。
 
 作者也曾经玩过一年多的Ps，但是一直没有深入了解过图片处理的计算方法，这里也顺便复习一下，一些概念知识片面的带过，有时间再写文章专门讨论。
 
-###正题
+## 正题
+
 其实，HTML5中通过Canvas处理图像只需要了解两个函数就够了，`getImageData`和`putImageData`，前者是读取一个Canvas的内容，返回一个对象，我们取名imageDate，
 ```javascript
 var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
@@ -22,12 +26,12 @@ context.putImageData(imageData, 0, 0);
 
 我们以下面的一张图片为例：
 
-![Canvas Pic 1](/img/canvas-1.png)
+![Canvas Pic 1](/image/canvas-1.png)
 
 首先，我们要把图片插入到Canvas中。
 ```javascript
 var img = new Image();
-img.src = "/img/canvas-1.png";
+img.src = "/image/canvas-1.png";
 context.drawImage(img, 0, 0); // 设置对应的图像对象，以及它在画布上的位置
 ```
 
@@ -47,7 +51,7 @@ image.onload = function() {
 
 } 
 
-image.src = "/img/canvas-1.png";
+image.src = "/image/canvas-1.png";
 ```
 drawImage()方法接受三个参数，第一个参数是图像文件的DOM元素（即img标签），第二个和第三个参数是图像左上角在Canvas元素中的坐标，上例中的（0, 0）就表示将图像左上角放置在Canvas元素的左上角。
 
@@ -60,11 +64,14 @@ if (canvas.width > 0 && canvas.height > 0) {
 }
 ```
 
-####1. 灰度效果
----
-#####数学原理
+## 1. 灰度效果
+
+### 数学原理
+
 灰度图（grayscale）就是取红、绿、蓝三个像素值的算术平均值，这实际上将图像转成了黑白形式。假定d[i]是像素数组中一个象素的红色值，则d[i+1]为绿色值，d[i+2]为蓝色值，d[i+3]就是alpha通道值。转成灰度的算法，就是将红、绿、蓝三个值相加后除以3，再将结果写回数组。
-#####代码
+
+### 代码
+
 ```javascript
 grayscale = function (pixels) {
     var d = pixels.data;
@@ -78,11 +85,14 @@ grayscale = function (pixels) {
 };
 ```
 
-####2. 复古效果
----
-#####数学原理
+## 2. 复古效果
+
+### 数学原理
+
 复古效果（sepia）则是将红、绿、蓝三个像素，分别取这三个值的某种加权平均值，使得图像有一种古旧的效果。
-#####代码
+
+### 代码
+
 ```javascript
 sepia = function (pixels) {
     var d = pixels.data;
@@ -99,11 +109,10 @@ sepia = function (pixels) {
 ```
 
 
-####3. 红色蒙版效果
----
-#####数学原理
+## 3. 红色蒙版效果
+### 数学原理
 红色蒙版指的是，让图像呈现一种偏红的效果。算法是将红色通道设为红、绿、蓝三个值的平均值，而将绿色通道和蓝色通道都设为0。
-#####代码
+### 代码
 ```javascript
 red = function (pixels) {
     var d = pixels.data;
@@ -118,11 +127,10 @@ red = function (pixels) {
 };
 ```
 
-####4. 亮度效果
----
-#####数学原理
+## 4. 亮度效果
+### 数学原理
 亮度效果（brightness）是指让图像变得更亮或更暗。算法将红色通道、绿色通道、蓝色通道，同时加上一个正值或负值。
-#####代码
+### 代码
 ```javascript
 brightness = function (pixels, delta) {
     var d = pixels.data;
@@ -135,11 +143,10 @@ brightness = function (pixels, delta) {
 };
 ```
 
-####5. 反转效果
----
-#####数学原理
+## 5. 反转效果
+### 数学原理
 反转效果（invert）是指图片呈现一种色彩颠倒的效果。算法为红、绿、蓝通道都取各自的相反值（255-原值）。
-#####代码
+### 代码
 ```javascript
 invert = function (pixels) {
     var d = pixels.data;
@@ -173,7 +180,7 @@ image.onload = function() {
     originImageData = context.getImageData(0, 0, canvas.width, canvas.height);
 
 } 
-image.src = "/img/canvas-1.png";
+image.src = "/image/canvas-1.png";
 
 function doWhat(filter, delta) {
 	if (canvas.width > 0 && canvas.height > 0) {

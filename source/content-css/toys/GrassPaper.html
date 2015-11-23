@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS3绘制草稿纸</title>
+    <link rel="stylesheet" href="../../css/common.css"/>
+    <style>
+        .grass-paper {
+            position: relative;
+            height: 494px;
+            width: 420px;
+            padding-left: 30px;
+            background: repeating-linear-gradient(to top, #f9f9f9, #f9f9f9 28px, #ccc 30px);
+        }
+
+        .grass-paper:before {
+            content: "";
+            display: inline-block;
+            height: 100%;
+            width: 4px;
+            border-left: 4px double #FCA1A1;
+            position: absolute;
+            left: 30px;
+        }
+
+        pre.pure {
+            border: none;
+            color: #000;
+            background-color: transparent;
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <h1>草稿纸</h1>
+
+    <div class="grass-paper">
+<pre class="pure">
+.grass-paper {
+    height: 494px;
+    width: 420px;
+    background: repeating-linear-gradient(to top, #f9f9f9, #f9f9f9 28px, #ccc 30px);
+}
+.grass-paper:before {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 4px;
+    border-left: 4px double #FCA1A1;
+    position: relative;
+    left: 30px;
+}
+</pre>
+    </div>
+</div>
+
+
+</body>
+</html>

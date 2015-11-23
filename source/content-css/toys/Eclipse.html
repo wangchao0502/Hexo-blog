@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模拟月食</title>
+    <link rel="stylesheet" href="../../css/common.css"/>
+    <style>
+        .panel {
+            background-color: black;
+        }
+
+        #moon, #dog {
+            display: inline-block;
+            height: 100px;
+            width: 100px;
+            position: relative;
+            border-radius: 50%;
+        }
+
+        #moon {
+            background-color: yellow;
+            z-index: 1;
+        }
+
+        @keyframes dog-move {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-200%);
+            }
+        }
+
+        #dog {
+            background-color: black;
+            z-index: 2;
+            animation: 8s dog-move linear infinite;
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <h1>模拟月食的过程Pure Css3</h1>
+
+<pre>
+#moon, #dog {
+    display: inline-block;
+    height: 100px;
+    width: 100px;
+    position: relative;
+    border-radius: 50%;
+}
+
+#moon {
+    background-color: yellow;
+    z-index: 1;
+}
+
+@keyframes dog-move {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-200%);
+    }
+}
+
+#dog {
+    background-color: black;
+    z-index: 2;
+    animation: 8s dog-move linear infinite;
+}
+</pre>
+    <div class="panel text-center">
+        <span id="moon"></span>
+        <span id="dog"></span>
+    </div>
+</div>
+</body>
+</html>

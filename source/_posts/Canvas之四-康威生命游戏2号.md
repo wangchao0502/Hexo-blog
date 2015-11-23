@@ -1,8 +1,12 @@
 title: Canvas之四 康威生命游戏2号
 date: 2014-11-27 01:38:09
 categories: blog
-tags: [博客, 前端, 自娱自乐]
+tags: 
+- 前端
+- canvas
+- 算法
 ---
+本文可以自己创建一个符合康威游戏规则的小世界，怎么发挥都随便你，看着这个这些虚拟小生命的繁衍，体验做上帝的感觉。
 <link rel="stylesheet" type="text/css" href="/css/canvas4.css">
 <div style="display:inline-block;">第<span id="generation" style="width: 100px;"></span>代<button onclick="reset();">重置</button><button onclick="start();">开始</button><input id="speed" placeholder="100 ms/g" style="width: 80px"><button onclick="stop();">暂停</button><button onclick="random();">随机</button><button onclick="nextGeneration();">下一代</button></div><hr><div><div class="left"><table id="diyTable"></table></div><canvas id="myCanvas" width="440" height="440">您的浏览器不支持HTML5</canvas></div>
 <script>

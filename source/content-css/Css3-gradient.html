@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS3特性——渐变</title>
+    <link rel="stylesheet" href="/css/common.css"/>
+    <style>
+        .block {
+            height: 100px;
+            width: 100px;
+            margin: 0 auto;
+        }
+
+        #exp1 {
+            background-image: linear-gradient(red, yellow);
+        }
+
+        #exp2 {
+            background-image: linear-gradient(to right, red, yellow);
+        }
+
+        #exp3 {
+            background-image: linear-gradient(to bottom right, red, yellow);
+        }
+
+        #exp4 {
+            background-image: linear-gradient(135deg, red, yellow);
+        }
+
+        #exp5 {
+            height: 100px;
+            width: 100%;
+            background-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+        }
+
+        #exp6 {
+            background-image: repeating-linear-gradient(red, yellow 20%);
+        }
+
+        .l-block {
+            height: 100px;
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        #exp7 {
+            background-image: radial-gradient(red, yellow);
+        }
+
+        #exp8 {
+            background-image: radial-gradient(circle, red, yellow);
+        }
+
+        #exp9 {
+            background-image: radial-gradient(50px, red, yellow);
+        }
+
+        #exp10 {
+            background-image: radial-gradient(50px at 50px 50px, red, yellow);
+        }
+
+        .inline-block .lb-block,
+        .inline-block .block {
+            display: inline-block;
+        }
+
+        #exp11 {
+            background-image: radial-gradient(50px at left, red, yellow);
+        }
+
+        #exp12 {
+            background-image: radial-gradient(50px at right, red, yellow);
+        }
+
+        #exp13 {
+            background-image: radial-gradient(50px at top, red, yellow);
+        }
+
+        #exp14 {
+            background-image: radial-gradient(50px at bottom, red, yellow);
+        }
+
+        #exp15 {
+            background-image: radial-gradient(50px at center, red, yellow);
+        }
+
+        .lb-block {
+            height: 100px;
+            width: 200px;
+        }
+
+        #exp16 {
+            background-image: radial-gradient(closest-side at 150px 50px, red, yellow);
+        }
+
+        #exp17 {
+            background-image: radial-gradient(closest-corner at 150px 50px, red, yellow);
+        }
+
+        #exp18 {
+            background-image: radial-gradient(farthest-side at 150px 50px, red, yellow);
+        }
+
+        #exp19 {
+            background-image: radial-gradient(farthest-corner at 150px 50px, red, yellow);
+        }
+
+        #exp20 {
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+            background-image: repeating-radial-gradient(red, yellow 20px);
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <h1>CSS3新特性：渐变（Gradients）</h1>
+    <article>
+        <p>
+            CSS3 渐变（gradients）可以让你在两个或多个指定的颜色之间显示平稳的过渡。<br/>
+            以前，你必须使用图像来实现这些效果。但是，通过使用 CSS3
+            渐变（gradients），你可以减少下载的事件和宽带的使用。此外，渐变效果的元素在放大时看起来效果更好，因为渐变（gradient）是由浏览器生成的。<br/>
+            CSS3 定义了两种类型的渐变（gradients）：
+        </p>
+        <dl>
+            <dt>线性渐变（Linear Gradients）</dt>
+            <dd>向下/向上/向左/向右/对角方向</dd>
+            <dt>径向渐变（Radial Gradients）</dt>
+            <dd>由它们的中心定义</dd>
+        </dl>
+    </article>
+    <h2>线性渐变</h2>
+    <article>
+        <strong class="notice">
+            background-image: linear-gradient( [ &lt;angle&gt; | &lt;side-or-corner&gt; ,]? &lt;color-stop&gt; [, &lt;color-stop&gt;
+            ]+
+            );
+        </strong>
+        <dl>
+            <dt>&lt;angle&gt;</dt>
+            <dd>
+                角度（Degree），单位deg（读作‘度’），一个圆共360度，90deg = 100grad = 0.25turn ≈ 1.570796326794897rad
+                <br/>
+                在transform中rotate的deg表示顺指针旋转角度，而渐变中的deg指水平线和渐变线之间的角度，逆时针方向计算。换句话说，0deg 将创建一个从下到上的渐变，90deg 将创建一个从左到右的渐变。
+            </dd>
+            <dt>&lt;side-or-corner&gt;</dt>
+            <dd>
+                to [left | right] || [top | bottom]
+                <br/>
+                表示以下组合left, right, top, bottom, left top, left bottom, right top, right bottom.
+                <br/>
+                <b>注意：如果webkit浏览器不加to，会现实异常</b>
+            </dd>
+            <dt>&lt;color-stop&gt;</dt>
+            <dd>
+                &lt;color&gt; [ &lt;percentage&gt; | &lt;length&gt; ]
+                <br/>
+                颜色值+空格+百分比或长度值。例如：red 100px。表示渐变的长度
+            </dd>
+        </dl>
+    </article>
+    <h3>使用方向控制</h3>
+    <article>
+        <strong class="notice">background: linear-gradient(direction, color-stop1, color-stop2, ...);</strong>
+    </article>
+    <h4>线性渐变——从上到下（默认）</h4>
+<pre>
+#exp1 {
+    background-image: linear-gradient(red, yellow);
+}
+</pre>
+    <div class="panel">
+        <div id="exp1" class="block"></div>
+    </div>
+    <h4>线性渐变——从左到右</h4>
+<pre>
+#exp2 {
+    background-image: linear-gradient(to right, red, yellow);
+}
+</pre>
+    <div class="panel">
+        <div id="exp2" class="block"></div>
+    </div>
+    <h4>线性渐变——从左上到右下（默认）</h4>
+<pre>
+#exp3 {
+    background-image: linear-gradient(to bottom right, red, yellow);
+}
+</pre>
+    <div class="panel">
+        <div id="exp3" class="block"></div>
+    </div>
+
+    <h3>使用角度控制</h3>
+    <article>
+        <strong class="notice">background: linear-gradient(angle, color-stop1, color-stop2, ...);</strong>
+    </article>
+    <h4>线性渐变——通过控制角度，实现从左上到右下</h4>
+<pre>
+#exp4 {
+    background-image: linear-gradient(135deg, red, yellow);
+}
+</pre>
+    <div class="panel">
+        <div id="exp4" class="block"></div>
+    </div>
+
+    <h3>可见光谱</h3>
+<pre>
+#exp5 {
+    height: 100px;
+    width: 100%;
+    background-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+}
+</pre>
+    <div class="panel">
+        <div id="exp5"></div>
+    </div>
+
+    <h3>重复的线性渐变</h3>
+<pre>
+#exp6 {
+    background-image: repeating-linear-gradient(red, yellow 10%);
+}
+</pre>
+    <div class="panel">
+        <div id="exp6" class="block"></div>
+    </div>
+
+    <h2>径向渐变</h2>
+    <article>
+        <strong class="notice">
+            background-image: radial-gradient([[ &lt;shape&gt; || &lt;size&gt; ] [ at &lt;position&gt; ]?, | at &lt;position&gt;,
+            ]? &lt;color-stop&gt; [, &lt;color-stop&gt; ]+);
+        </strong>
+        <dl>
+            <dt>&lt;shape&gt;</dt>
+            <dd>
+                主要用来定义径向渐变的形状。其主要包括两个值“circle”和“ellipse”
+                <dl>
+                    <dt>circle</dt>
+                    <dd>如果&lt;size&gt;和&lt;length&gt;大小相等，那么径向渐变是一个圆形，也就是用来指定圆形的径向渐变</dd>
+                    <dt>ellipse</dt>
+                    <dd>如果&lt;size&gt;和&lt;length&gt;大小不相等，那么径向渐变是一个椭圆形，也就是用来指定椭圆形的径向渐变。</dd>
+                </dl>
+            </dd>
+            <dt>&lt;size&gt;</dt>
+            <dd>
+                主要用来确定径向渐变的结束形状大小。如果省略了，其默认值为“farthest-corner”。可以给其显式的设置一些关键词
+                <dl>
+                    <dt>closest-side</dt>
+                    <dd>指定径向渐变的半径长度为从圆心到离圆心最近的边</dd>
+                    <dt>closest-corner</dt>
+                    <dd>指定径向渐变的半径长度为从圆心到离圆心最近的角</dd>
+                    <dt>farthest-side</dt>
+                    <dd>指定径向渐变的半径长度为从圆心到离圆心最远的边</dd>
+                    <dt>farthest-corner</dt>
+                    <dd>指定径向渐变的半径长度为从圆心到离圆心最远的角</dd>
+                </dl>
+            </dd>
+            <dt>&lt;position&gt;</dt>
+            <dd>
+                主要用来定义径向渐变的<b>圆心</b>位置（浏览器的坐标定义方式，都是以左上角为圆点，横坐标纵坐标分别向右向下递增）。此值类似于CSS中background-position属性，用于确定元素渐变的中心位置。如果这个参数省略了，其默认值为“center”。
+                <dl>
+                    <dt>&lt;length&gt;</dt>
+                    <dd>用长度值指定径向渐变圆心的横坐标或纵坐标。可以为负值。</dd>
+                    <dt>&lt;percentage&gt;</dt>
+                    <dd>用百分比指定径向渐变圆心的横坐标或纵坐标。可以为负值。</dd>
+                    <dt>left</dt>
+                    <dd>设置左边为径向渐变圆心的横坐标值。</dd>
+                    <dt>center</dt>
+                    <dd>设置中间为径向渐变圆心的横坐标值或纵坐标。</dd>
+                    <dt>right</dt>
+                    <dd>设置右边为径向渐变圆心的横坐标值。</dd>
+                    <dt>top</dt>
+                    <dd>设置顶部为径向渐变圆心的纵标值。</dd>
+                    <dt>bottom</dt>
+                    <dd>设置底部为径向渐变圆心的纵标值。</dd>
+                </dl>
+            </dd>
+        </dl>
+    </article>
+
+    <h3>实例1——最简单参数，长宽半径根据容器变化</h3>
+<pre>
+#exp7 {
+    background-image: radial-gradient(red, yellow);
+}
+</pre>
+    <div class="panel">
+        <div class="l-block" id="exp7"></div>
+    </div>
+
+    <h3>实例2——指定形状</h3>
+<pre>
+#exp8 {
+    background-image: radial-gradient(circle, red, yellow);
+}
+</pre>
+    <div class="panel">
+        <div class="l-block" id="exp8"></div>
+    </div>
+
+    <h3>实例3——用数值代替circle</h3>
+<pre>
+#exp9 {
+    background-image: radial-gradient(50px, red, yellow);
+}
+</pre>
+    <div class="panel">
+        <div class="l-block" id="exp9"></div>
+    </div>
+    <h3>实例4——增加position</h3>
+<pre>
+#exp10 {
+    background-image: radial-gradient(50px at 50px 50px, red, yellow);
+}
+</pre>
+    <div class="panel">
+        <div class="l-block" id="exp10"></div>
+    </div>
+
+    <h3>实例5——展示5种预定义位置</h3>
+<pre>
+left, right, top, bottom, center
+</pre>
+    <div class="panel inline-block">
+        <div class="block" id="exp11"></div>
+        <div class="block" id="exp12"></div>
+        <div class="block" id="exp13"></div>
+        <div class="block" id="exp14"></div>
+        <div class="block" id="exp15"></div>
+    </div>
+
+    <h3>实力6——展示4中预定义大小</h3>
+<pre>
+#exp16 {
+    background-image: radial-gradient(closest-side at 150px 50px, red, yellow);
+}
+
+#exp17 {
+    background-image: radial-gradient(closest-corner at 150px 50px, red, yellow);
+}
+
+#exp18 {
+    background-image: radial-gradient(farthest-side at 150px 50px, red, yellow);
+}
+
+#exp19 {
+    background-image: radial-gradient(farthest-corner at 150px 50px, red, yellow);
+}
+</pre>
+    <div class="panel inline-block">
+        <div class="lb-block" id="exp16"></div>
+        <div class="lb-block" id="exp17"></div>
+        <div class="lb-block" id="exp18"></div>
+        <div class="lb-block" id="exp19"></div>
+    </div>
+    <small>* 想象一下，如果第一张图的position设为right，则背景会是一片白色</small>
+    <br/>
+    <small>** 注意，size是有两个值的，上例中都用了一个值，所以长宽半径都遵循相同的规律</small>
+
+    <h3>重复径向渐变</h3>
+<pre>
+#exp20 {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    background-image: repeating-radial-gradient(red, yellow 20px);
+}
+</pre>
+    <div class="panel">
+        <div id="exp20"></div>
+    </div>
+
+    <h3>实例：利用线性重复渐变绘制草稿纸</h3>
+    <a href="/CssSimples/content/toys/GrassPaper.html">草稿纸</a>
+
+</div>
+</body>
+</html>

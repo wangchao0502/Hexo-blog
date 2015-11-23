@@ -1,8 +1,13 @@
 title: Canvas之三 康威生命游戏1号
 date: 2014-11-27 01:36:14
 categories: blog
-tags: [博客, 前端, 自娱自乐]
+tags: 
+- 前端
+- canvas
+- 算法
 ---
+
+本文实现了一个随机小世界的繁衍过程，可以控制迭代速度，纯原生js实现
 
 <div style="display:inline-block;">第<span id="generation" style="width: 100px;"></span>代<button onclick="reset();">重置</button><button onclick="start();">开始</button><input id="speed" placeholder="100 ms/g" style="width: 80px"><button onclick="stop();">暂停</button><button onclick="nextGeneration();">下一代</button></div><hr><div><canvas id="myCanvas" width="400" height="400">您的浏览器不支持HTML5</canvas></div>
 <script>

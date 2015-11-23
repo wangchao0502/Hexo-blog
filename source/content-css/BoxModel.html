@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS盒子模型</title>
+    <style>
+        .box-wrap {
+            background: burlywood;
+            /*BFC*/
+            overflow: hidden;
+        }
+
+        .box {
+            float: left;
+            height: 100px;
+            width: 100px;
+            padding: 5px 10px;
+            margin: 10px 20px;
+            background: red;
+            border: 10px solid black;
+            font-size: 12px;
+            color: white;
+        }
+
+        .unset .box {
+            height: auto;
+            width: auto;
+        }
+
+        .border-box {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .content-box {
+            -webkit-box-sizing: content-box;
+            -moz-box-sizing: content-box;
+            box-sizing: content-box;
+        }
+
+        pre {
+            padding: 10px 40px;
+            border-left: 10px solid green;
+            background-color: black;
+            color: chartreuse;
+        }
+
+    </style>
+</head>
+<body>
+<h1>本文研究css的盒子模型</h1>
+
+<p>
+    由于当代浏览器基本兼容了HTML5，所以我们不讨论老版本的IE的特殊盒子模型但是css3中加入了box-sizing元素 <br/>
+    我们可以选择使用老IE的盒子模型border-box，活着w3c的盒子模型content-box <br/>
+    一下两个盒子模型的height，width都是100px <br/>
+    黑色是border <br/>
+    红色是背景
+</p>
+
+<pre>
+.box {
+    display: inline-block;
+    background: red;
+    border: 10px solid black;
+    height: 100px;
+    width: 100px;
+    padding: 5px 10px;
+    margin: 10px 20px;
+}
+</pre>
+
+<h2>对盒子模型设置绝对宽高</h2>
+<h3>box-sizing: border-box;</h3>
+<div class="box-wrap">
+    <div class="box border-box">
+        <b>写段文字，看看我们的padding</b>
+    </div>
+    <div class="box border-box"></div>
+    <div class="box border-box"></div>
+    <div class="box border-box"></div>
+    <div class="box border-box"></div>
+    <div class="box border-box"></div>
+    <div class="box border-box"></div>
+    <div class="box border-box"></div>
+    <div class="box border-box"></div>
+    <div class="box border-box"></div>
+</div>
+<h3>box-sizing: content-box;</h3>
+<div class="box-wrap">
+    <div class="box content-box">
+        <b>写段文字，看看我们的padding</b>
+    </div>
+    <div class="box content-box"></div>
+    <div class="box content-box"></div>
+    <div class="box content-box"></div>
+    <div class="box content-box"></div>
+    <div class="box content-box"></div>
+    <div class="box content-box"></div>
+    <div class="box content-box"></div>
+    <div class="box content-box"></div>
+    <div class="box content-box"></div>
+</div>
+<p>实际上，之后当box样式设置了固定的宽高，box-sizing样式才表现出差异。如果我们去掉宽高，让他们根据内容自动调整宽高，看看是什么效果。</p>
+
+<h3>取消宽高设置，根据content自动调整</h3>
+<div class="box-wrap unset">
+    <div class="box border-box">
+        <b>写段文字，看看我们的padding</b>
+    </div>
+    <div class="box border-box"></div>
+    <div class="box border-box"></div>
+    <div class="box border-box"></div>
+    <div class="box border-box"></div>
+    <div class="box border-box"></div>
+    <div class="box border-box"></div>
+    <div class="box border-box"></div>
+    <div class="box border-box"></div>
+    <div class="box border-box"></div>
+</div>
+<h3>box-sizing: content-box;</h3>
+<div class="box-wrap unset">
+    <div class="box content-box">
+        <b>写段文字，看看我们的padding</b>
+    </div>
+    <div class="box content-box"></div>
+    <div class="box content-box"></div>
+    <div class="box content-box"></div>
+    <div class="box content-box"></div>
+    <div class="box content-box"></div>
+    <div class="box content-box"></div>
+    <div class="box content-box"></div>
+    <div class="box content-box"></div>
+    <div class="box content-box"></div>
+</div>
+<p>可以看出，如果不设置宽高，盒子模型没有任何表现，但是通过浏览器的开发这工具查看发现，height和width是不一样的</p>
+<p>所以差别就在于，这两种模型的计算height和width的方式不同</p>
+<pre>
+border-box(IE6) = content + padding + border
+content-box(w3c) = content
+</pre>
+
+<p>bootstrap对box-sizing的全局设置就是border-size，个人感觉也比较符合我们的直观感觉吧</p>
+
+</body>
+</html>

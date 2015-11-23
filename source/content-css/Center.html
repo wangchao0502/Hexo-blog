@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>元素居中</title>
+    <link rel="stylesheet" href="/css/common.css"/>
+    <style>
+        #block-center {
+            width: 200px;
+            height: 200px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #00ffff;
+        }
+
+        #inline-center {
+            /*span就是行级元素，这里可以不用声明*/
+            display: inline;
+            color: red;
+            font-weight: bold;
+        }
+
+        #relative-block-center {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            /*margin一定要设置成宽的一半*/
+            margin: 0 0 0 -100px;
+            left: 50%;
+            background-color: #00ffff;
+        }
+
+        #absolute-block-center {
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            margin: 0 auto;
+            left: 0;
+            right: 0;
+            background-color: #00ffff;
+            opacity: 1;
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+        }
+
+        #absolute-block-center:hover {
+            opacity: 0;
+        }
+
+        .wrap-vertical {
+            height: 200px;
+        }
+
+        #vertical-center {
+            background: #ffdb4c;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /*表格布局法*/
+        .display-table {
+            display: table;
+        }
+
+        .display-table-cell {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .wrap-table-cell {
+            width: 100%;
+            height: 200px;
+        }
+
+        #table-cell {
+            background: #ffdb4c;
+            width: 100px;
+            height: 100px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <h1>各种居中的实现</h1>
+
+    <p>这里我们要讨论各种情况的居中，包括水平居中和竖直居中。包括块级元素和行级元素的居中。浮动元素的居中。</p>
+
+    <h2>居中一个div元素和其中的内容</h2>
+    <pre>
+#block-center {
+    width: 200px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #00ffff;
+}
+    </pre>
+    <div class="panel">
+        <div id="block-center" class="text-center text-vertical-center">
+            I'm lovely block! <br/>User text-center to make content center align
+        </div>
+    </div>
+    <small>* 以上实现了block和inline元素的水平居中，inline-block元素本身就是inline的扩展，所以用text-align: center;使其水平居中</small>
+    <small>** block元素居中一定要设置宽度（绝对相对均可），否则会撑满屏幕</small>
+
+    <h2>居中inline元素</h2>
+    <pre>
+#inline-center {
+    /*span就是行级元素，这里可以不用声明*/
+    display: inline;
+    color: red;
+    font-weight: bold;
+}
+    </pre>
+    <div class="panel text-center">
+        <span id="inline-center">This is a span element</span>
+        <br/>
+    </div>
+    <small>* 以上是一个span元素放在一个div中，所以span作为div的内容，需要经text-center的class放在div里，同上例一样</small>
+
+    <h2>让一个position:relative的元素居中</h2>
+<pre>
+#relative-block-center {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    /*margin一定要设置成宽的一半*/
+    margin: 0 0 0 -100px;
+    left: 50%;
+    background-color: #00ffff;
+}
+</pre>
+    <div class="panel">
+        <div id="relative-block-center" class="text-center">
+            I'm a relative-block element.
+        </div>
+    </div>
+    <small>* 相对布局的div元素，需要手动设置margin，因为left:50%会使该元素偏离中轴线一半的宽度，所以需要手动调整</small>
+
+    <h2>让一个position:absolute的元素居中</h2>
+    <pre>
+#absolute-block-center {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    background-color: #00ffff;
+}
+    </pre>
+    <!-- absolute的外层元素需要设置为relative布局，否则absolute元素会跑到根元素的布局上-->
+    <div class="panel wrap-absolute" style="position: relative;">
+        <div id="absolute-block-center" class="text-center">
+            I'm a absolute-block element. <br/>
+            Mouse on me, disappear
+        </div>
+    </div>
+    <small>* 这里的外层元素没有包住内层元素是正常的，因为absolute会脱离原来的布局流。但是居中的表现是正常的。margin, left, right缺一不可</small>
+
+    <article>
+        <h3>补充：position的值以及作用</h3>
+        <dl>
+            <dt>static</dt>
+            <dd>默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right 或者 <strong class="notice">z-index</strong> 声明）。</dd>
+            <dt>relative</dt>
+            <dd>生成相对定位的元素，相对于其正常位置进行定位。因此，"left:20" 会向元素的 LEFT 位置添加 20 像素。</dd>
+            <dt>absolute</dt>
+            <dd>生成绝对定位的元素，相对于 static 定位以外的第一个父元素进行定位。元素的位置通过 "left", "top", "right" 以及 "bottom" 属性进行规定。</dd>
+            <dt>fixed</dt>
+            <dd>生成绝对定位的元素，相对于浏览器窗口进行定位。元素的位置通过 "left", "top", "right" 以及 "bottom" 属性进行规定。</dd>
+            <dt>inherit</dt>
+            <dd>规定应该从父元素继承 position 属性的值。</dd>
+        </dl>
+    </article>
+
+    <h2>垂直居中——1</h2>
+<pre>
+.wrap-vertical {
+    height: 500px;
+}
+#vertical-center {
+    background: #ffdb4c;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+</pre>
+    <div class="panel wrap-vertical">
+        <div id="vertical-center" class="text-center">
+            I'm a block, I want to vertical center
+        </div>
+    </div>
+    <small>* 这种方法一定要配合top: 50%使用</small>
+    <br/>
+    <small>** 代码中的transform是css3的特性，表示向上平移当前元素高度的50%，也可以用于水平居中，类似于relative block的水平居中</small>
+
+    <h2>垂直居中——2</h2>
+<pre>
+/*表格布局法*/
+.display-table {
+    display: table;
+}
+
+.display-table-cell {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.wrap-table-cell {
+    width: 100%;
+    height: 200px;
+}
+
+#table-cell {
+    background: #ffdb4c;
+    width: 100px;
+    height: 100px;
+}
+</pre>
+    <div class="panel">
+        <div class="display-table wrap-table-cell">
+            <div class="display-table-cell">
+                <div id="table-cell" class="center-block text-center">
+                    I'm a block display in a table-cell
+                </div>
+            </div>
+        </div>
+    </div>
+    <small>* 这种方法可以兼容到IE8，原理就是利用table的布局，利用display: table;和display: table-cell;将核心元素的外两层元素变成table和td，这样核心元素就变成了内容，垂直方向上可以很神奇的用vertical-align: middle;来进行居中。但水平居中还是跟核心元素的块／行有关。</small>
+</div>
+</body>
+</html>
