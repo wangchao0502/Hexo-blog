@@ -49,19 +49,20 @@ var subway={
 先把这两道题放着，最后再来分析。
 
 
-> In JavaScript, as in most object-oriented programming languages, this is a special keyword that is used within methods to refer to the object on which a method is being invoked.
-> The this keyword is relative to the execution context, not the declaration context.
+> In JavaScript, as in most object-oriented programming languages, `this` is a special keyword that is used within methods to refer to the object on which a method is being invoked.
+> The `this` keyword is relative to the execution context, not the declaration context.
 
-> this指向函数执行时的当前对象(或理解为调用函数的对象)。该关键字在Javascript中和执行环境，而非声明环境有关。
+> `this`指向函数执行时的当前对象(或理解为调用函数的对象)。该关键字在Javascript中和执行环境，而非声明环境有关。
 
-对this的定义相当简单，但是我们要知道的是如何确定是那个对象调用了函数，在不同的运行环境下，this到底指向谁？
+对`this`的定义相当简单，但是我们要知道的是如何确定是那个对象调用了函数，在不同的运行环境下，`this`到底指向谁？
 
 ## Where is `this`?
 
 [Understanding JavaScript’s this keyword](https://javascriptweblog.wordpress.com/2010/08/30/understanding-javascripts-this/)
 
 通过Twitter的Angus Croll的博客，我们来梳理下this在不同上下文中的指向。
-<table><tr><th>Execution Context</th><th>Syntax of function call</th><th>Value of this</th></tr><tr><td>Global</td><td>n/a</td><td>global object(e.g. `window`)</td></tr><tr><td>Function</td><td>Method call: `myObject.foo();`</td><td>`myObject`</td></tr><tr><td>Function</td><td>Baseless function call: `foo();`</td><td>global object(e.g. `window`) (`undefined` in strict mode)</td></tr><tr><td>Function</td><td>Using call: `foo.call(context, myArg, myArg)` | `foo.call(context, [myArgs])`</td><td>`context`</td></tr><tr><td>Function</td><td>Constructor with new: `var newFoo = new Foo();`</td><td>the new instance(e.g. `newFoo`)</td></tr><tr><td>Evaluation</td><td>n/a</td><td>value of `this` in parent context</td></tr></table>
+
+![](/image/js-this.png)
 
 ### 1. Global context
 
